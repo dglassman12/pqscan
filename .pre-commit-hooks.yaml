@@ -1,0 +1,16 @@
+# Lets other repositories run pqscan from pre-commit:
+#
+#   repos:
+#     - repo: https://github.com/<you>/pqscan
+#       rev: v0.3.0
+#       hooks:
+#         - id: pqscan
+#           args: [".", "--quiet", "--baseline", ".pqscan-baseline.json", "--fail-on", "critical"]
+- id: pqscan
+  name: pqscan (post-quantum crypto inventory)
+  description: Fail the commit when new quantum-vulnerable cryptography is introduced.
+  entry: pqscan
+  language: python
+  pass_filenames: false
+  always_run: true
+  args: [".", "--quiet", "--fail-on", "critical"]

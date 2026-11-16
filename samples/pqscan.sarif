@@ -1,0 +1,1873 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "pqscan",
+          "version": "0.3.0",
+          "properties": {
+            "generator": "pqscan-generated"
+          },
+          "rules": [
+            {
+              "id": "RSA-001",
+              "name": "RsaUsage",
+              "shortDescription": {
+                "text": "RSA (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "RSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "RSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "pke"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "RSA-002",
+              "name": "RsaUsage",
+              "shortDescription": {
+                "text": "RSA (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "RSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "RSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "signature"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "ECDSA-001",
+              "name": "EcdsaUsage",
+              "shortDescription": {
+                "text": "ECDSA (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "ECDSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "ECDSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "signature"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "ECDH-001",
+              "name": "EcdhUsage",
+              "shortDescription": {
+                "text": "ECDH (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "ECDH: Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "ECDH: Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "key-agreement"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "ECDH-002",
+              "name": "X25519X448Usage",
+              "shortDescription": {
+                "text": "X25519 / X448 (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "X25519 / X448: Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "X25519 / X448: Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "key-agreement"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "EDDSA-001",
+              "name": "EddsaUsage",
+              "shortDescription": {
+                "text": "EdDSA (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "EdDSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "EdDSA: Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "signature"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "ECC-001",
+              "name": "EllipticCurveSchemeNotStatedUsage",
+              "shortDescription": {
+                "text": "Elliptic curve (scheme not stated) (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "Elliptic curve (scheme not stated): Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "Elliptic curve (scheme not stated): Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-KEM (FIPS 203) for key agreement; ML-DSA (FIPS 204) for signatures."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "ec"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "DH-001",
+              "name": "DiffieHellmanFiniteFieldUsage",
+              "shortDescription": {
+                "text": "Diffie-Hellman (finite field) (quantum-vulnerable public-key crypto)"
+              },
+              "fullDescription": {
+                "text": "Diffie-Hellman (finite field): Broken by Shor's algorithm on a cryptographically relevant quantum computer."
+              },
+              "help": {
+                "text": "Diffie-Hellman (finite field): Broken by Shor's algorithm on a cryptographically relevant quantum computer. Recommended replacement: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "key-agreement"
+                ],
+                "security-severity": "9.0"
+              }
+            },
+            {
+              "id": "AES-128",
+              "name": "Aes128Usage",
+              "shortDescription": {
+                "text": "AES-128 (approved, below strictest profile)"
+              },
+              "fullDescription": {
+                "text": "AES-128: Weakened, not broken, by Grover's algorithm. Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256."
+              },
+              "help": {
+                "text": "AES-128: Weakened, not broken, by Grover's algorithm. Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256. Recommended replacement: AES-256 where policy requires it."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "block-cipher"
+                ],
+                "security-severity": "3.0"
+              }
+            },
+            {
+              "id": "AES-000",
+              "name": "AesKeySizeNotStatedUsage",
+              "shortDescription": {
+                "text": "AES (key size not stated) (needs a human to confirm)"
+              },
+              "fullDescription": {
+                "text": "AES (key size not stated): Weakened, not broken, by Grover's algorithm. The key length is set at runtime and cannot be read statically."
+              },
+              "help": {
+                "text": "AES (key size not stated): Weakened, not broken, by Grover's algorithm. The key length is set at runtime and cannot be read statically. Recommended replacement: Confirm the key length; use 256-bit keys."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "block-cipher"
+                ],
+                "security-severity": "1.0"
+              }
+            },
+            {
+              "id": "3DES-001",
+              "name": "3DesUsage",
+              "shortDescription": {
+                "text": "3DES (classically weak, replace regardless)"
+              },
+              "fullDescription": {
+                "text": "3DES: Weak against classical attacks today. 64-bit block (Sweet32) and 112-bit strength."
+              },
+              "help": {
+                "text": "3DES: Weak against classical attacks today. 64-bit block (Sweet32) and 112-bit strength. Recommended replacement: AES-256 (GCM) or ChaCha20-Poly1305."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "block-cipher"
+                ],
+                "security-severity": "7.0"
+              }
+            },
+            {
+              "id": "RC4-001",
+              "name": "Rc4Usage",
+              "shortDescription": {
+                "text": "RC4 (classically weak, replace regardless)"
+              },
+              "fullDescription": {
+                "text": "RC4: Weak against classical attacks today. Biased keystream; prohibited in TLS (RFC 7465)."
+              },
+              "help": {
+                "text": "RC4: Weak against classical attacks today. Biased keystream; prohibited in TLS (RFC 7465). Recommended replacement: AES-256 (GCM) or ChaCha20-Poly1305."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "stream-cipher"
+                ],
+                "security-severity": "7.0"
+              }
+            },
+            {
+              "id": "MD5-001",
+              "name": "Md5Usage",
+              "shortDescription": {
+                "text": "MD5 (classically weak, replace regardless)"
+              },
+              "fullDescription": {
+                "text": "MD5: Weak against classical attacks today. Practical collisions since 2004."
+              },
+              "help": {
+                "text": "MD5: Weak against classical attacks today. Practical collisions since 2004. Recommended replacement: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "hash"
+                ],
+                "security-severity": "7.0"
+              }
+            },
+            {
+              "id": "SHA1-001",
+              "name": "Sha1Usage",
+              "shortDescription": {
+                "text": "SHA-1 (classically weak, replace regardless)"
+              },
+              "fullDescription": {
+                "text": "SHA-1: Weak against classical attacks today. Practical collisions since 2017."
+              },
+              "help": {
+                "text": "SHA-1: Weak against classical attacks today. Practical collisions since 2017. Recommended replacement: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "hash"
+                ],
+                "security-severity": "7.0"
+              }
+            },
+            {
+              "id": "TLS-001",
+              "name": "Tls1011Usage",
+              "shortDescription": {
+                "text": "TLS 1.0 / 1.1 (classically weak, replace regardless)"
+              },
+              "fullDescription": {
+                "text": "TLS 1.0 / 1.1: Weak against classical attacks today. Deprecated by RFC 8996."
+              },
+              "help": {
+                "text": "TLS 1.0 / 1.1: Weak against classical attacks today. Deprecated by RFC 8996. Recommended replacement: TLS 1.3 (the only version with post-quantum hybrid key exchange)."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography",
+                  "post-quantum",
+                  "protocol"
+                ],
+                "security-severity": "7.0"
+              }
+            }
+          ]
+        }
+      },
+      "originalUriBaseIds": {
+        "%SRCROOT%": {
+          "description": {
+            "text": "The scanned directory."
+          }
+        }
+      },
+      "results": [
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). X.509 certificate, CN=api.example.test, RSA-2048, signed with sha256WithRSAEncryption, expires 2034-04-08, self-signed. Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/certs/api.example.test.crt",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "de61db7aab1cca6a3cef"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "certificate"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). X.509 certificate, CN=Legacy Root CA (test fixture), RSA-2048, signed with sha1WithRSAEncryption, expires 2036-09-24, self-signed. Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/certs/legacy-root.example.test.crt",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "26ab762a2c44c96b395f"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "certificate"
+          }
+        },
+        {
+          "ruleId": "ECDH-001",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "ECDH found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 25
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "31d0359d5638084db7cf"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "16b884424105930d7eaf"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "DH-001",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "Diffie-Hellman (finite field) found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 53
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "49168f6ad9cfea8134a2"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "DH-001",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "Diffie-Hellman (finite field) found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 9
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "9ff2a530b70b3602189e"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/sshd_config",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 27
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "29d81ea6bc1d32d68783"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "ECDH-002",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "X25519 / X448 found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/sshd_config",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 37
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "65af814c3ebbb7028cca"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "DH-001",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "Diffie-Hellman (finite field) found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/sshd_config",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 55
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "7c562fdb010dd82c15ba"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "ECDH-001",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "ECDH found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "8e2dc6216f7836dbde8e"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 18
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "be7256179aaa431be683"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "5f42bcce7c06360c00e2"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDH-002",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "X25519 / X448 found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 39
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "0fde19f5754eef517b53"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECC-001",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "Elliptic curve (scheme not stated) found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key agreement; ML-DSA (FIPS 204) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/payments/TokenSigner.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 55
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "50f56f40ad1f721497c2"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 55
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "2a88a118e18f12db5684"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "a4d929e4e6b9de0b73f3"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECC-001",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "Elliptic curve (scheme not stated) found (quantum-vulnerable public-key crypto). SECP256R1. Replace with: ML-KEM (FIPS 203) for key agreement; ML-DSA (FIPS 204) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "65da32f92b7185b8e909"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 38
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "e8ce7f53319403b45793"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDH-001",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "ECDH found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "0fadbba8c0c767e05e9d"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 28
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "21b47ec2ab1cea8ea417"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-001",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 27
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "743101e5769260f40cb0"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDH-001",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "ECDH found (quantum-vulnerable public-key crypto). Replace with: ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 13
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "ece4199af8afcd446d04"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 1,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDSA-001",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "ECDSA found (quantum-vulnerable public-key crypto). X.509 certificate, CN=gateway.example.test, EC P-256, signed with ecdsa-with-SHA256, expires 2029-05-04, self-signed. Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/certs/gateway.example.test.crt",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "1b05e45094f85cf2faba"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "certificate"
+          }
+        },
+        {
+          "ruleId": "RSA-002",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/sshd_config",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 19
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "e7309cb69e82eae4d5af"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "EDDSA-001",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "EdDSA found (quantum-vulnerable public-key crypto). Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/sshd_config",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 44
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "8c26607ff9f1d9309c26"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "ECDSA-001",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "ECDSA found (quantum-vulnerable public-key crypto). Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 10
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "a0c9f6dae2283f4a3797"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDSA-001",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "ECDSA found (quantum-vulnerable public-key crypto). Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "e25ebd662ca832317044"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDSA-001",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "ECDSA found (quantum-vulnerable public-key crypto). elliptic.P256. Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 9
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "5b686df8dd514b7f607f"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "RSA-002",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "RSA found (quantum-vulnerable public-key crypto). Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/payments/TokenSigner.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 57
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "b9f95f34931c9e7f3dad"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "ECDSA-001",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "ECDSA found (quantum-vulnerable public-key crypto). Replace with: ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 80,
+                  "startColumn": 17
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "77ea0e39a742a2a82621"
+          },
+          "properties": {
+            "risk": "critical",
+            "migrationPriority": 2,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Certificate signed with sha1WithRSAEncryption. Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/certs/legacy-root.example.test.crt",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "aea6022d9e91fcb5428c"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "certificate"
+          }
+        },
+        {
+          "ruleId": "TLS-001",
+          "ruleIndex": 14,
+          "level": "error",
+          "message": {
+            "text": "TLS 1.0 / 1.1 found (classically weak, replace regardless). Deprecated by RFC 8996. Replace with: TLS 1.3 (the only version with post-quantum hybrid key exchange)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "9f67be1c7576eb578399"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 68
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "bc85bfebf14dbac0170b"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "RC4-001",
+          "ruleIndex": 11,
+          "level": "error",
+          "message": {
+            "text": "RC4 found (classically weak, replace regardless). Biased keystream; prohibited in TLS (RFC 7465). Replace with: AES-256 (GCM) or ChaCha20-Poly1305."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 72
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "89de88a4e4b4c9ac689b"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/sshd_config",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4,
+                  "startColumn": 78
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "67f1be5cea7b2e8d04e0"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "TLS-001",
+          "ruleIndex": 14,
+          "level": "error",
+          "message": {
+            "text": "TLS 1.0 / 1.1 found (classically weak, replace regardless). Deprecated by RFC 8996. Replace with: TLS 1.3 (the only version with post-quantum hybrid key exchange)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 19
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "f23d7426d1639db4b3e0"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "3DES-001",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "3DES found (classically weak, replace regardless). 64-bit block (Sweet32) and 112-bit strength. Replace with: AES-256 (GCM) or ChaCha20-Poly1305."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 21
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "3a8f8ebb4cff9313fd79"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 34
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "eca26dc444ae570774dd"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/payments/TokenSigner.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 43
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "2fa1bf90e7c95717ab06"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "3DES-001",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "3DES found (classically weak, replace regardless). 64-bit block (Sweet32) and 112-bit strength. Replace with: AES-256 (GCM) or ChaCha20-Poly1305."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/payments/TokenSigner.java",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 45
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "31140ae3409eabe0532a"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "4f768e32c7334ee5cc26"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "MD5-001",
+          "ruleIndex": 12,
+          "level": "error",
+          "message": {
+            "text": "MD5 found (classically weak, replace regardless). Practical collisions since 2004. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 20
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "6d3de81a5470ff1cd2ca"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "SHA1-001",
+          "ruleIndex": 13,
+          "level": "error",
+          "message": {
+            "text": "SHA-1 found (classically weak, replace regardless). Practical collisions since 2017. Replace with: SHA-256 or stronger (SHA-384 for CNSA 2.0)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 14
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "c4cdc6054ace6e66bbd2"
+          },
+          "properties": {
+            "risk": "high",
+            "migrationPriority": 3,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "AES-128",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "AES-128 found (approved, below strictest profile). Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256. Replace with: AES-256 where policy requires it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deploy/nginx.conf",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 35
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "6ad5e31e7a6dd1844459"
+          },
+          "properties": {
+            "risk": "low",
+            "migrationPriority": 4,
+            "context": "config"
+          }
+        },
+        {
+          "ruleId": "AES-128",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "AES-128 found (approved, below strictest profile). Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256. Replace with: AES-256 where policy requires it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "services/gateway/tls.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 27
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "86b62811c5c30cb75929"
+          },
+          "properties": {
+            "risk": "low",
+            "migrationPriority": 4,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "AES-128",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "AES-128 found (approved, below strictest profile). Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256. Replace with: AES-256 where policy requires it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 13
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "97366e9b392e78190871"
+          },
+          "properties": {
+            "risk": "low",
+            "migrationPriority": 4,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "AES-128",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "AES-128 found (approved, below strictest profile). Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256. Replace with: AES-256 where policy requires it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "6ff7616457db6c3ab5aa"
+          },
+          "properties": {
+            "risk": "low",
+            "migrationPriority": 4,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "AES-128",
+          "ruleIndex": 8,
+          "level": "note",
+          "message": {
+            "text": "AES-128 found (approved, below strictest profile). Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256. Replace with: AES-256 where policy requires it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 19
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "d99ce711191436364945"
+          },
+          "properties": {
+            "risk": "low",
+            "migrationPriority": 4,
+            "context": "code"
+          }
+        },
+        {
+          "ruleId": "AES-000",
+          "ruleIndex": 9,
+          "level": "note",
+          "message": {
+            "text": "AES (key size not stated) found (needs a human to confirm). The key length is set at runtime and cannot be read statically. Replace with: Confirm the key length; use 256-bit keys."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_app.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "pqscan/v1": "c9e74f1fb06f4abb42ad"
+          },
+          "properties": {
+            "risk": "info",
+            "migrationPriority": 4,
+            "context": "code"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# sample manifest for testing dependency detection
+cryptography==41.0.7
+pyjwt==2.8.0
+paramiko==3.4.0
+requests==2.31.0
+pydantic==2.5.0

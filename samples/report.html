@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="pqscan-generated">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cryptographic inventory: examples</title>
+<style>
+:root {
+  --plane: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #131722;
+  --ink-2: #4a5263;
+  --ink-3: #7c8496;
+  --line: #dde1e9;
+  --line-2: #c5cbd6;
+  --accent: #3a35b0;
+  --accent-wash: #ecebfb;
+  --critical: #d03b3b;
+  --high: #ec835a;
+  --medium: #fab219;
+  --low: #7f8aa0;
+  --info: #b1b8c6;
+  --safe: #0ca30c;
+  --zone-ok: #e6f1e6;
+  --zone-dep: #fdf0d5;
+  --zone-out: #f8dcdc;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --plane: #0e1014;
+    --surface: #171a21;
+    --ink: #eceef3;
+    --ink-2: #b9bfcc;
+    --ink-3: #8189a0;
+    --line: #2a2f3a;
+    --line-2: #3a4050;
+    --accent: #aaa6ff;
+    --accent-wash: #25234a;
+    --low: #8f9ab0;
+    --info: #5b6478;
+    --zone-ok: #17301b;
+    --zone-dep: #3d3013;
+    --zone-out: #451d1f;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--plane); color: var(--ink);
+  font: 15px/1.5 var(--sans);
+}
+.page { max-width: 1120px; margin: 0 auto; padding: 40px 28px 72px; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: 15px; font-weight: 600; color: var(--ink-2); }
+.verdict {
+  font-size: clamp(28px, 4.4vw, 46px); line-height: 1.12; font-weight: 700;
+  letter-spacing: -0.022em; margin: 10px 0 14px; max-width: 21em; text-wrap: balance;
+}
+.lede { color: var(--ink-2); max-width: 68ch; }
+.meta { color: var(--ink-3); font-size: 13px; margin-top: 14px; }
+.meta span + span::before { content: ""; display: inline-block; width: 1px; height: 11px;
+  background: var(--line-2); margin: 0 10px; vertical-align: -1px; }
+h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.012em; margin-bottom: 6px; }
+section { margin-top: 56px; }
+.sub { color: var(--ink-2); max-width: 72ch; margin-bottom: 18px; }
+code, .path { font-family: var(--mono); font-size: 0.87em; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* runway */
+.runway { margin-top: 34px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 22px 24px 18px; }
+.runway-head { display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline;
+  justify-content: space-between; margin-bottom: 20px; }
+.runway-head h2 { font-size: 16px; margin: 0; }
+.runway-head p { color: var(--ink-2); font-size: 13.5px; }
+.track { position: relative; height: 44px; border-radius: 6px; overflow: hidden;
+  display: flex; gap: 2px; }
+.zone { height: 100%; display: flex; align-items: center; padding: 0 12px;
+  font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; min-width: 0; }
+.zone.ok { background: var(--zone-ok); }
+.zone.dep { background: var(--zone-dep); }
+.zone.out { background: var(--zone-out); }
+.axis { position: relative; height: 26px; margin-top: 6px; font-size: 12px;
+  color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.axis span { position: absolute; top: 4px; transform: translateX(-50%); }
+.axis span:first-child { transform: none; }
+.axis i { position: absolute; top: 0; width: 1px; height: 4px; background: var(--line-2); }
+.certs { position: relative; height: 0; }
+.certs.on { height: 30px; margin-top: 4px; }
+.pin { position: absolute; top: 4px; width: 14px; height: 14px; margin-left: -7px;
+  border-radius: 50%; border: 2px solid var(--surface); background: var(--critical);
+  cursor: default; padding: 0; }
+.pin.safe { background: var(--safe); }
+.pin.over { border-radius: 3px; }
+.runway-foot { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--ink-2);
+  font-size: 13px; margin-top: 12px; }
+.key { display: inline-flex; align-items: center; gap: 7px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex: none; display: inline-block; }
+.dot.critical { background: var(--critical); } .dot.high { background: var(--high); }
+.dot.medium { background: var(--medium); } .dot.low { background: var(--low); }
+.dot.info { background: var(--info); } .dot.safe { background: var(--safe); }
+
+/* fix first */
+.tiers { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.tier { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 4px 18px;
+  padding: 18px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.tier-n { font-size: 26px; font-weight: 700; line-height: 1.1; color: var(--ink-3);
+  font-variant-numeric: tabular-nums; }
+.tier h3 { font-size: 16.5px; font-weight: 650; }
+.tier p { color: var(--ink-2); max-width: 70ch; margin-top: 3px; }
+.tier-count { text-align: right; font-size: 26px; font-weight: 700; line-height: 1.1;
+  font-variant-numeric: tabular-nums; }
+.tier-count small { display: block; font-size: 12.5px; font-weight: 400; color: var(--ink-3);
+  margin-top: 4px; }
+.chips { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { border: 1px solid var(--line-2); background: var(--surface); border-radius: 999px;
+  padding: 3px 11px; font-size: 13px; cursor: pointer; }
+.chip b { font-weight: 600; margin-left: 5px; font-variant-numeric: tabular-nums; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent-wash); border-color: var(--accent); }
+
+/* bars */
+.bars { display: grid; grid-template-columns: minmax(120px, 270px) minmax(0, 1fr); gap: 0 16px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px 22px; }
+.bar-row { display: contents; cursor: pointer; }
+.bar-row > * { padding: 6px 0; border-bottom: 1px solid var(--line); }
+.bar-row:last-child > * { border-bottom: 0; }
+.bar-name { display: flex; align-items: center; gap: 9px; min-width: 0; background: none;
+  border: 0; border-bottom: 1px solid var(--line); text-align: left; cursor: pointer; }
+.bar-name span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-cell { display: flex; align-items: center; gap: 10px; }
+.bar { height: 12px; border-radius: 0 4px 4px 0; min-width: 3px; }
+.bar.critical { background: var(--critical); } .bar.high { background: var(--high); }
+.bar.medium { background: var(--medium); } .bar.low { background: var(--low); }
+.bar.info { background: var(--info); } .bar.safe { background: var(--safe); }
+.bar-val { font-variant-numeric: tabular-nums; font-size: 13.5px; }
+.bar-row:hover .bar-name span:last-child, .bar-row.on .bar-name span:last-child {
+  color: var(--accent); }
+.bar-row.on .bar-name { font-weight: 650; }
+
+/* tables */
+.tablewrap { background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line);
+  vertical-align: top; }
+thead th { font-weight: 600; color: var(--ink-2); font-size: 13px; white-space: nowrap;
+  background: var(--surface); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.nw { white-space: nowrap; }
+th button { background: none; border: 0; padding: 0; font-weight: 600; cursor: pointer;
+  color: inherit; }
+th button[data-dir]::after { content: " \25B4"; color: var(--accent); }
+th button[data-dir="desc"]::after { content: " \25BE"; }
+.risk { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.tag { font-size: 12px; border: 1px solid var(--line-2); border-radius: 4px; padding: 0 5px;
+  color: var(--ink-2); margin-left: 6px; }
+tr.finding { cursor: pointer; }
+tr.finding:hover td { background: var(--accent-wash); }
+tr.more td { background: var(--plane); padding: 12px 14px 14px 37px; }
+tr.more pre { margin: 0 0 8px; font: 13px/1.5 var(--mono); white-space: pre-wrap;
+  word-break: break-word; }
+tr.more p { color: var(--ink-2); max-width: 86ch; font-size: 13.5px; }
+tr.more p + p { margin-top: 3px; }
+.where { font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; min-width: 13em; }
+#findings .where { min-width: 21em; }
+@media (max-width: 640px) { #findings .where { min-width: 0; } }
+.snip { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); max-width: 360px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center;
+  margin-bottom: 12px; }
+.filters input[type="search"] { font: inherit; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line-2); border-radius: 7px; padding: 6px 11px; width: 300px;
+  max-width: 100%; }
+.toggle { border: 1px solid var(--line-2); background: var(--surface); border-radius: 7px;
+  padding: 5px 11px; font-size: 13.5px; cursor: pointer; display: inline-flex;
+  align-items: center; gap: 7px; }
+.toggle[aria-pressed="false"] { color: var(--ink-3); background: transparent; }
+.toggle[aria-pressed="false"] .dot { opacity: 0.35; }
+.count { color: var(--ink-2); font-size: 13.5px; margin-left: auto; }
+.linkish { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px; font-size: 13.5px; }
+.showmore { display: block; width: 100%; padding: 11px; background: none; border: 0;
+  border-top: 1px solid var(--line); cursor: pointer; color: var(--accent); font-weight: 600; }
+.empty { padding: 26px 14px; color: var(--ink-2); text-align: center; }
+.notes { margin: 0; padding-left: 20px; color: var(--ink-2); max-width: 86ch; }
+.notes li + li { margin-top: 6px; }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
+  color: var(--ink-3); font-size: 13px; max-width: 86ch; }
+#tip { position: fixed; z-index: 10; pointer-events: none; background: var(--ink);
+  color: var(--plane); font-size: 12.5px; line-height: 1.4; padding: 6px 9px; border-radius: 6px;
+  max-width: 320px; display: none; }
+@media (max-width: 640px) {
+  .page { padding: 24px 16px 56px; }
+  .tier { grid-template-columns: 30px minmax(0, 1fr); }
+  .tier-count { grid-column: 2; text-align: left; font-size: 18px; }
+  .tier-count small { display: inline; margin-left: 6px; }
+  .bars { grid-template-columns: minmax(0, 1fr); padding: 10px 14px; }
+  .bar-name { border-bottom: 0 !important; padding-bottom: 0 !important; }
+  .hide-s { display: none; }
+}
+@media print {
+  body { background: #fff; }
+  .filters, .showmore, #tip { display: none !important; }
+  section { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1 id="h-title"></h1>
+    <p class="verdict" id="verdict"></p>
+    <p class="lede" id="lede"></p>
+    <p class="meta" id="meta"></p>
+    <div class="runway" id="runway">
+      <div class="runway-head">
+        <h2>Runway</h2>
+        <p id="runway-text"></p>
+      </div>
+      <div class="track" id="track"></div>
+      <div class="axis" id="axis"></div>
+      <div class="certs" id="certs"></div>
+      <div class="runway-foot" id="runway-foot"></div>
+    </div>
+  </header>
+
+  <section id="sec-tiers">
+    <h2>What to fix first</h2>
+    <p class="sub">Ordered by threat, not by count. Select an algorithm to see where it is used.</p>
+    <ol class="tiers" id="tiers"></ol>
+  </section>
+
+  <section id="sec-bars">
+    <h2>By algorithm</h2>
+    <p class="sub">Every algorithm found, most urgent first. Select a row to filter the findings below.</p>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section id="sec-areas">
+    <h2>Where it lives</h2>
+    <p class="sub">Findings by top-level directory, split by the four priorities above.</p>
+    <div class="tablewrap"><table id="areas"></table></div>
+  </section>
+
+  <section id="sec-findings">
+    <h2>Findings</h2>
+    <p class="sub">Select a row for the source line and the recommended replacement.</p>
+    <div class="filters" id="filters"></div>
+    <div class="tablewrap">
+      <table id="findings"></table>
+      <div class="empty" id="empty" hidden>No findings match these filters.</div>
+      <button class="showmore" id="showmore" hidden></button>
+    </div>
+  </section>
+
+  <section id="sec-certs">
+    <h2>Certificates</h2>
+    <p class="sub">Parsed from PEM and DER files. A certificate that outlives a deadline has to be reissued with a post-quantum key before then.</p>
+    <div class="tablewrap"><table id="certtable"></table></div>
+  </section>
+
+  <section id="sec-deps">
+    <h2>Crypto libraries</h2>
+    <p class="sub">A dependency is not a vulnerability, but each one is a place where quantum-vulnerable algorithms may be in use even if your own code never names them. Where a library already ships the NIST algorithms, the last column says from which version.</p>
+    <div class="tablewrap"><table id="deptable"></table></div>
+  </section>
+
+  <section id="sec-notes">
+    <h2>Not covered</h2>
+    <ul class="notes" id="notes"></ul>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script type="application/json" id="data">{"meta":{"target":"examples","generated":"2026-11-15 20:22","today":"2026-11-15","policy":"nist","policyText":"FIPS 203/204/205 and NIST IR 8547","version":"0.3.0","filesScanned":12,"filesSkipped":0,"baseline":false,"deadlineSource":"NIST IR 8547"},"summary":{"total":67,"actionable":49,"pkVulnerable":30,"pkSafe":5,"migratedPct":14,"filesWithFindings":8,"newCount":67,"byRisk":[["critical",30],["high",13],["low",5],["info",1],["safe",18]],"byAlgorithm":[["RSA",13,"critical"],["ECDSA",5,"critical"],["ECDH",4,"critical"],["Diffie-Hellman (finite field)",3,"critical"],["Elliptic curve (scheme not stated)",2,"critical"],["X25519 / X448",2,"critical"],["EdDSA",1,"critical"],["SHA-1",7,"high"],["3DES",2,"high"],["TLS 1.0 / 1.1",2,"high"],["MD5",1,"high"],["RC4",1,"high"],["AES-128",5,"low"],["AES (key size not stated)",1,"info"],["SHA-256",6,"safe"],["AES-256",4,"safe"],["Hybrid PQ key exchange",2,"safe"],["ML-DSA",2,"safe"],["ChaCha20",1,"safe"],["ML-KEM",1,"safe"],["SHA-384",1,"safe"],["SHA-512",1,"safe"]],"priorities":[{"n":1,"title":"Key establishment and encryption","guidance":"Exposed to harvest-now-decrypt-later: traffic captured today can be decrypted later. Move these first, starting with anything that protects data with a long confidentiality lifetime.","count":22,"algorithms":[["RSA",11],["ECDH",4],["Diffie-Hellman (finite field)",3],["Elliptic curve (scheme not stated)",2],["X25519 / X448",2]]},{"n":2,"title":"Signatures and certificates","guidance":"Forgery needs a quantum computer at attack time, so there is more runway. Start with long-lived roots of trust: code signing, firmware, CA certificates.","count":8,"algorithms":[["ECDSA",5],["RSA",2],["EdDSA",1]]},{"n":3,"title":"Classically weak primitives","guidance":"Already broken or deprecated without any quantum computer. Usually the cheapest fixes on the list.","count":13,"algorithms":[["SHA-1",7],["3DES",2],["TLS 1.0 / 1.1",2],["MD5",1],["RC4",1]]},{"n":4,"title":"Policy and hardening","guidance":"Approved today but below the selected policy, or a parameter that needs a human to confirm.","count":6,"algorithms":[["AES-128",5],["AES (key size not stated)",1]]}],"areas":[["deploy",9,3,5,1,18],["(top level)",8,1,3,4,16],["services",5,4,5,1,15]],"deadlines":[["Deprecated by NIST","2030-12-31",1507,"Quantum-vulnerable public-key algorithms are deprecated after this date."],["Disallowed by NIST","2035-12-31",3333,"Quantum-vulnerable public-key algorithms are disallowed after this date."]]},"riskLabels":{"critical":"Quantum-vulnerable public-key crypto","high":"Classically weak, replace regardless","medium":"Legacy or below policy","low":"Approved, below strictest profile","info":"Needs a human to confirm","safe":"Post-quantum safe"},"findings":[{"p":"deploy/certs/api.example.test.crt","l":1,"a":"RSA","r":"critical","q":1,"c":"certificate","s":"-----BEGIN CERTIFICATE-----","d":"X.509 certificate, CN=api.example.test, RSA-2048, signed with sha256WithRSAEncryption, expires 2034-04-08, self-signed","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"deploy/certs/legacy-root.example.test.crt","l":1,"a":"RSA","r":"critical","q":1,"c":"certificate","s":"-----BEGIN CERTIFICATE-----","d":"X.509 certificate, CN=Legacy Root CA (test fixture), RSA-2048, signed with sha1WithRSAEncryption, expires 2036-09-24, self-signed","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"ECDH","r":"critical","q":1,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"RSA","r":"critical","q":1,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"Diffie-Hellman (finite field)","r":"critical","q":1,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"deploy/nginx.conf","l":9,"a":"Diffie-Hellman (finite field)","r":"critical","q":1,"c":"config","s":"ssl_dhparam         /etc/nginx/dhparam.pem;","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"deploy/sshd_config","l":2,"a":"RSA","r":"critical","q":1,"c":"config","s":"HostKey /etc/ssh/ssh_host_rsa_key","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"deploy/sshd_config","l":4,"a":"X25519 / X448","r":"critical","q":1,"c":"config","s":"KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"deploy/sshd_config","l":4,"a":"Diffie-Hellman (finite field)","r":"critical","q":1,"c":"config","s":"KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"services/gateway/tls.go","l":19,"a":"ECDH","r":"critical","q":1,"c":"code","s":"tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"services/gateway/tls.go","l":19,"a":"RSA","r":"critical","q":1,"c":"code","s":"tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"services/gateway/tls.go","l":20,"a":"RSA","r":"critical","q":1,"c":"code","s":"tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"services/gateway/tls.go","l":22,"a":"X25519 / X448","r":"critical","q":1,"c":"code","s":"CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"services/payments/TokenSigner.java","l":22,"a":"Elliptic curve (scheme not stated)","r":"critical","q":1,"c":"code","s":"KeyPairGenerator generator = KeyPairGenerator.getInstance(\"EC\");","d":"","n":"","w":"ML-KEM (FIPS 203) for key agreement; ML-DSA (FIPS 204) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":11,"a":"RSA","r":"critical","q":1,"c":"code","s":"from cryptography.hazmat.primitives.asymmetric import rsa, ec, padding","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":18,"a":"RSA","r":"critical","q":1,"c":"code","s":"return rsa.generate_private_key(public_exponent=65537, key_size=2048)","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":23,"a":"Elliptic curve (scheme not stated)","r":"critical","q":1,"c":"code","s":"return ec.generate_private_key(ec.SECP256R1())","d":"SECP256R1","n":"","w":"ML-KEM (FIPS 203) for key agreement; ML-DSA (FIPS 204) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":29,"a":"RSA","r":"critical","q":1,"c":"code","s":"return key.sign(payload, padding.PKCS1v15(), hashes.SHA256())","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":69,"a":"ECDH","r":"critical","q":1,"c":"code","s":"ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"vulnerable_app.py","l":69,"a":"RSA","r":"critical","q":1,"c":"code","s":"ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":76,"a":"RSA","r":"critical","q":1,"c":"code","s":"\"signing_algorithm\": \"RSA-2048\",","d":"","n":"","w":"ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures","new":true,"m":false},{"p":"vulnerable_app.py","l":79,"a":"ECDH","r":"critical","q":1,"c":"code","s":"\"kex\": \"ECDH\",","d":"","n":"","w":"ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition","new":true,"m":false},{"p":"deploy/certs/gateway.example.test.crt","l":1,"a":"ECDSA","r":"critical","q":2,"c":"certificate","s":"-----BEGIN CERTIFICATE-----","d":"X.509 certificate, CN=gateway.example.test, EC P-256, signed with ecdsa-with-SHA256, expires 2029-05-04, self-signed","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"deploy/sshd_config","l":3,"a":"RSA","r":"critical","q":2,"c":"config","s":"HostKeyAlgorithms ssh-rsa,rsa-sha2-512,ssh-ed25519","d":"","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"deploy/sshd_config","l":3,"a":"EdDSA","r":"critical","q":2,"c":"config","s":"HostKeyAlgorithms ssh-rsa,rsa-sha2-512,ssh-ed25519","d":"","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"services/gateway/tls.go","l":5,"a":"ECDSA","r":"critical","q":2,"c":"code","s":"\"crypto/ecdsa\"","d":"","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"services/gateway/tls.go","l":11,"a":"ECDSA","r":"critical","q":2,"c":"code","s":"func newServerKey() (*ecdsa.PrivateKey, error) {","d":"","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"services/gateway/tls.go","l":12,"a":"ECDSA","r":"critical","q":2,"c":"code","s":"return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)","d":"elliptic.P256","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"services/payments/TokenSigner.java","l":15,"a":"RSA","r":"critical","q":2,"c":"code","s":"Signature signer = Signature.getInstance(\"SHA256withRSA\");","d":"","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"vulnerable_app.py","l":80,"a":"ECDSA","r":"critical","q":2,"c":"code","s":"\"jwt_alg\": \"ES256\",","d":"","n":"","w":"ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)","new":true,"m":false},{"p":"deploy/certs/legacy-root.example.test.crt","l":1,"a":"SHA-1","r":"high","q":3,"c":"certificate","s":"-----BEGIN CERTIFICATE-----","d":"Certificate signed with sha1WithRSAEncryption","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"deploy/nginx.conf","l":7,"a":"TLS 1.0 / 1.1","r":"high","q":3,"c":"config","s":"ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;","d":"","n":"Deprecated by RFC 8996.","w":"TLS 1.3 (the only version with post-quantum hybrid key exchange)","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"SHA-1","r":"high","q":3,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"RC4","r":"high","q":3,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"Biased keystream; prohibited in TLS (RFC 7465).","w":"AES-256 (GCM) or ChaCha20-Poly1305","new":true,"m":false},{"p":"deploy/sshd_config","l":4,"a":"SHA-1","r":"high","q":3,"c":"config","s":"KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1","d":"","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"services/gateway/tls.go","l":17,"a":"TLS 1.0 / 1.1","r":"high","q":3,"c":"code","s":"MinVersion: tls.VersionTLS10, // TODO: raise to TLS 1.3","d":"","n":"Deprecated by RFC 8996.","w":"TLS 1.3 (the only version with post-quantum hybrid key exchange)","new":true,"m":false},{"p":"services/gateway/tls.go","l":20,"a":"3DES","r":"high","q":3,"c":"code","s":"tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,","d":"","n":"64-bit block (Sweet32) and 112-bit strength.","w":"AES-256 (GCM) or ChaCha20-Poly1305","new":true,"m":false},{"p":"services/gateway/tls.go","l":20,"a":"SHA-1","r":"high","q":3,"c":"code","s":"tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,","d":"","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"services/payments/TokenSigner.java","l":28,"a":"SHA-1","r":"high","q":3,"c":"code","s":"return MessageDigest.getInstance(\"SHA-1\").digest(data);","d":"","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"services/payments/TokenSigner.java","l":32,"a":"3DES","r":"high","q":3,"c":"code","s":"Cipher cipher = Cipher.getInstance(\"DESede/CBC/PKCS5Padding\");","d":"","n":"64-bit block (Sweet32) and 112-bit strength.","w":"AES-256 (GCM) or ChaCha20-Poly1305","new":true,"m":false},{"p":"vulnerable_app.py","l":36,"a":"SHA-1","r":"high","q":3,"c":"code","s":"return hashlib.sha1(data).hexdigest()","d":"","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"vulnerable_app.py","l":40,"a":"MD5","r":"high","q":3,"c":"code","s":"return hashlib.md5(data).hexdigest()","d":"","n":"Practical collisions since 2004.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"vulnerable_app.py","l":77,"a":"SHA-1","r":"high","q":3,"c":"code","s":"\"hash\": \"SHA-1\",","d":"","n":"Practical collisions since 2017.","w":"SHA-256 or stronger (SHA-384 for CNSA 2.0)","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"AES-128","r":"low","q":4,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256.","w":"AES-256 where policy requires it","new":true,"m":false},{"p":"services/gateway/tls.go","l":19,"a":"AES-128","r":"low","q":4,"c":"code","s":"tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,","d":"","n":"Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256.","w":"AES-256 where policy requires it","new":true,"m":false},{"p":"vulnerable_app.py","l":49,"a":"AES-128","r":"low","q":4,"c":"code","s":"def encrypt_aes128(key: bytes, iv: bytes, plaintext: bytes) -\u003e bytes:","d":"","n":"Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256.","w":"AES-256 where policy requires it","new":true,"m":false},{"p":"vulnerable_app.py","l":69,"a":"AES-128","r":"low","q":4,"c":"code","s":"ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")","d":"","n":"Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256.","w":"AES-256 where policy requires it","new":true,"m":false},{"p":"vulnerable_app.py","l":78,"a":"AES-128","r":"low","q":4,"c":"code","s":"\"symmetric\": \"AES-128\",","d":"","n":"Grover's algorithm weakens but does not break AES-128; NIST still approves it. CNSA 2.0 requires AES-256.","w":"AES-256 where policy requires it","new":true,"m":false},{"p":"vulnerable_app.py","l":51,"a":"AES (key size not stated)","r":"info","q":4,"c":"code","s":"cipher = Cipher(algorithms.AES(key), modes.CBC(iv))","d":"","n":"The key length is set at runtime and cannot be read statically.","w":"Confirm the key length; use 256-bit keys","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"SHA-256","r":"safe","q":0,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"Approved by NIST. CNSA 2.0 requires SHA-384 or SHA-512.","w":"","new":true,"m":false},{"p":"deploy/nginx.conf","l":8,"a":"AES-256","r":"safe","q":0,"c":"config","s":"ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;","d":"","n":"","w":"","new":true,"m":false},{"p":"deploy/sshd_config","l":3,"a":"SHA-512","r":"safe","q":0,"c":"config","s":"HostKeyAlgorithms ssh-rsa,rsa-sha2-512,ssh-ed25519","d":"","n":"","w":"","new":true,"m":false},{"p":"deploy/sshd_config","l":4,"a":"Hybrid PQ key exchange","r":"safe","q":0,"c":"config","s":"KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1","d":"","n":"Classical + post-quantum combined; secure if either holds.","w":"","new":true,"m":false},{"p":"deploy/sshd_config","l":4,"a":"SHA-256","r":"safe","q":0,"c":"config","s":"KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1","d":"","n":"Approved by NIST. CNSA 2.0 requires SHA-384 or SHA-512.","w":"","new":true,"m":false},{"p":"deploy/sshd_config","l":5,"a":"AES-256","r":"safe","q":0,"c":"config","s":"Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com","d":"","n":"","w":"","new":true,"m":false},{"p":"deploy/sshd_config","l":5,"a":"ChaCha20","r":"safe","q":0,"c":"config","s":"Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com","d":"","n":"","w":"","new":true,"m":false},{"p":"pq/hybrid_kex.py","l":9,"a":"ML-KEM","r":"safe","q":0,"c":"code","s":"KEM_NAME = \"ML-KEM-768\"","d":"","n":"FIPS 203.","w":"","new":true,"m":false},{"p":"pq/hybrid_kex.py","l":10,"a":"Hybrid PQ key exchange","r":"safe","q":0,"c":"code","s":"TLS_GROUP = \"X25519MLKEM768\"","d":"","n":"Classical + post-quantum combined; secure if either holds.","w":"","new":true,"m":false},{"p":"pq/hybrid_kex.py","l":11,"a":"ML-DSA","r":"safe","q":0,"c":"code","s":"SIGNATURE = \"ML-DSA-65\"","d":"","n":"FIPS 204.","w":"","new":true,"m":false},{"p":"pq/pq.example.test.crt","l":1,"a":"ML-DSA","r":"safe","q":0,"c":"certificate","s":"-----BEGIN CERTIFICATE-----","d":"X.509 certificate, CN=pq.example.test, ML-DSA-65, signed with ML-DSA-65, expires 2036-10-29, self-signed","n":"FIPS 204.","w":"","new":true,"m":false},{"p":"services/gateway/tls.go","l":19,"a":"SHA-256","r":"safe","q":0,"c":"code","s":"tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,","d":"","n":"Approved by NIST. CNSA 2.0 requires SHA-384 or SHA-512.","w":"","new":true,"m":false},{"p":"services/payments/TokenSigner.java","l":15,"a":"SHA-256","r":"safe","q":0,"c":"code","s":"Signature signer = Signature.getInstance(\"SHA256withRSA\");","d":"","n":"Approved by NIST. CNSA 2.0 requires SHA-384 or SHA-512.","w":"","new":true,"m":false},{"p":"vulnerable_app.py","l":29,"a":"SHA-256","r":"safe","q":0,"c":"code","s":"return key.sign(payload, padding.PKCS1v15(), hashes.SHA256())","d":"","n":"Approved by NIST. CNSA 2.0 requires SHA-384 or SHA-512.","w":"","new":true,"m":false},{"p":"vulnerable_app.py","l":44,"a":"SHA-384","r":"safe","q":0,"c":"code","s":"return hashlib.sha384(data).hexdigest()","d":"","n":"","w":"","new":true,"m":false},{"p":"vulnerable_app.py","l":56,"a":"AES-256","r":"safe","q":0,"c":"code","s":"def encrypt_aes256(key: bytes, iv: bytes, plaintext: bytes) -\u003e bytes:","d":"","n":"","w":"","new":true,"m":false},{"p":"vulnerable_app.py","l":58,"a":"AES-256","r":"safe","q":0,"c":"code","s":"cipher = Cipher(algorithms.AES256(key), modes.GCM(iv))","d":"","n":"","w":"","new":true,"m":false},{"p":"vulnerable_app.py","l":69,"a":"SHA-256","r":"safe","q":0,"c":"code","s":"ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")","d":"","n":"Approved by NIST. CNSA 2.0 requires SHA-384 or SHA-512.","w":"","new":true,"m":false}],"certificates":[{"path":"deploy/certs/api.example.test.crt","line":1,"subject":"CN=api.example.test","issuer":"CN=api.example.test","key_algorithm":"RSA","key_bits":2048,"signature_algorithm":"sha256WithRSAEncryption","not_before":"2026-11-16","not_after":"2034-04-08","self_signed":true,"quantum_safe":false},{"path":"deploy/certs/gateway.example.test.crt","line":1,"subject":"CN=gateway.example.test","issuer":"CN=gateway.example.test","key_algorithm":"EC P-256","key_bits":256,"signature_algorithm":"ecdsa-with-SHA256","not_before":"2026-11-16","not_after":"2029-05-04","self_signed":true,"quantum_safe":false},{"path":"deploy/certs/legacy-root.example.test.crt","line":1,"subject":"CN=Legacy Root CA (test fixture)","issuer":"CN=Legacy Root CA (test fixture)","key_algorithm":"RSA","key_bits":2048,"signature_algorithm":"sha1WithRSAEncryption","not_before":"2026-11-16","not_after":"2036-09-24","self_signed":true,"quantum_safe":false},{"path":"pq/pq.example.test.crt","line":1,"subject":"CN=pq.example.test","issuer":"CN=pq.example.test","key_algorithm":"ML-DSA-65","key_bits":null,"signature_algorithm":"ML-DSA-65","not_before":"2026-11-01","not_after":"2036-10-29","self_signed":true,"quantum_safe":true}],"dependencies":[{"library":"cryptography","version":"==41.0.7","ecosystem":"pypi","path":"requirements.txt","note":"Python crypto bindings: RSA, ECC, AES, hashes","pqc":false,"pqPath":"ML-KEM and ML-DSA from version 48"},{"library":"paramiko","version":"==3.4.0","ecosystem":"pypi","path":"requirements.txt","note":"SSH implementation: RSA / ECDSA / Ed25519 keys","pqc":false,"pqPath":""},{"library":"pyjwt","version":"==2.8.0","ecosystem":"pypi","path":"requirements.txt","note":"JOSE / JWT: usually RSA or ECDSA signed","pqc":false,"pqPath":""},{"library":"@noble/post-quantum","version":"^0.2.0","ecosystem":"npm","path":"web/package.json","note":"Post-quantum algorithms","pqc":true,"pqPath":""},{"library":"jsonwebtoken","version":"^9.0.2","ecosystem":"npm","path":"web/package.json","note":"JOSE / JWT: usually RSA or ECDSA signed","pqc":false,"pqPath":""},{"library":"node-forge","version":"1.3.1","ecosystem":"npm","path":"web/package.json","note":"TLS, RSA and X.509 in JavaScript","pqc":false,"pqPath":""}],"notes":["12 matches in comments and documentation left out of the counts. Run with --include-mentions to count them."]}</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("data").textContent);
+  var S = D.summary, M = D.meta;
+  var RISKS = ["critical", "high", "medium", "low", "info", "safe"];
+  var RANK = {}; RISKS.forEach(function (r, i) { RANK[r] = i; });
+  var PAGE = 100;
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;
+    return n;
+  }
+  function fmt(n) { return Number(n).toLocaleString("en-US"); }
+  function plural(n, one, many) { return fmt(n) + " " + (n === 1 ? one : (many || one + "s")); }
+  function riskCell(risk) {
+    var s = el("span", "risk");
+    s.appendChild(el("span", "dot " + risk));
+    s.appendChild(el("span", null, risk));
+    return s;
+  }
+  function hide(id) { $(id).hidden = true; }
+
+  /* tooltip */
+  var tip = $("tip");
+  function bindTip(node, text) {
+    node.addEventListener("mouseenter", function () { tip.textContent = text; tip.style.display = "block"; });
+    node.addEventListener("mousemove", function (e) {
+      var x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+      tip.style.left = x + "px"; tip.style.top = (e.clientY + 16) + "px";
+    });
+    node.addEventListener("mouseleave", function () { tip.style.display = "none"; });
+    node.setAttribute("aria-label", text);
+  }
+
+  /* header */
+  $("h-title").textContent = "Cryptographic inventory for " + M.target;
+  var verdict;
+  if (S.pkVulnerable) {
+    verdict = plural(S.pkVulnerable, "use") + " of quantum-vulnerable cryptography in " +
+      plural(S.filesWithFindings, "file") + ".";
+  } else if (S.actionable) {
+    verdict = "No quantum-vulnerable public-key cryptography found. " +
+      plural(S.actionable, "other item") + " to review.";
+  } else if (S.total) {
+    verdict = "Everything found is post-quantum safe.";
+  } else {
+    verdict = "No cryptography detected.";
+  }
+  $("verdict").textContent = verdict;
+  var lede = "";
+  if (S.pkVulnerable + S.pkSafe) {
+    lede = S.migratedPct + "% of public-key usage (" + fmt(S.pkSafe) + " of " +
+      fmt(S.pkVulnerable + S.pkSafe) + ") is post-quantum or hybrid. ";
+  }
+  if (!S.total) {
+    lede = "Nothing matched the scanner's rules. That is not proof that there is no cryptography here.";
+  } else if (S.actionable - S.pkVulnerable > 0) {
+    lede += plural(S.actionable - S.pkVulnerable, "more finding") +
+      " cover weak hashes, legacy ciphers and policy gaps.";
+  }
+  if (M.baseline) lede += " " + plural(S.newCount, "finding") + (S.newCount === 1 ? " is" : " are") + " new since the baseline.";
+  $("lede").textContent = lede;
+  [M.generated, plural(M.filesScanned, "file") + " scanned", "Policy: " + M.policy, "pqscan " + M.version]
+    .forEach(function (t) { $("meta").appendChild(el("span", null, t)); });
+
+  /* runway */
+  (function () {
+    var day = 86400000;
+    var today = new Date(M.today + "T00:00:00Z").getTime();
+    var dep = new Date(S.deadlines[0][1] + "T00:00:00Z").getTime() + day;
+    var out = new Date(S.deadlines[1][1] + "T00:00:00Z").getTime() + day;
+    var end = out + 2 * 365.25 * day;
+    var span = end - today;
+    function pct(t) { return Math.max(0, Math.min(100, 100 * (t - today) / span)); }
+    function years(t) { return ((t - today) / (365.25 * day)).toFixed(1); }
+
+    var zones = [
+      ["ok", "Approved", today, Math.max(today, dep)],
+      ["dep", "Deprecated", Math.max(today, dep), Math.max(today, out)],
+      ["out", "Disallowed", Math.max(today, out), end]
+    ];
+    zones.forEach(function (z) {
+      var width = pct(z[3]) - pct(z[2]);
+      if (width <= 0) return;
+      var node = el("div", "zone " + z[0], z[1]);
+      node.style.width = width + "%";
+      node.title = z[1];
+      $("track").appendChild(node);
+      if (node.scrollWidth > node.clientWidth) node.textContent = "";   // too narrow for its label
+    });
+    var y0 = new Date(today).getUTCFullYear();
+    var first = el("span", null, "Today"); first.style.left = "0";
+    $("axis").appendChild(first);
+    for (var y = y0 + 1; y <= new Date(end).getUTCFullYear(); y++) {
+      var t = Date.UTC(y, 0, 1), p = pct(t);
+      if (p < (window.innerWidth < 640 ? 15 : 6) || p > 97) continue;
+      var tick = el("i"); tick.style.left = p + "%"; $("axis").appendChild(tick);
+      var lab = el("span", (y % 2 ? "hide-s" : null), String(y)); lab.style.left = p + "%";
+      $("axis").appendChild(lab);
+    }
+    $("runway-text").textContent = dep > today
+      ? years(dep) + " years until quantum-vulnerable public-key algorithms are deprecated, " +
+        years(out) + " until they are disallowed (" + M.deadlineSource + ")."
+      : "Quantum-vulnerable public-key algorithms are already deprecated (" + M.deadlineSource + ").";
+
+    var dated = D.certificates.filter(function (c) { return c.not_after; });
+    var foot = $("runway-foot");
+    if (dated.length) {
+      $("certs").className = "certs on";
+      var late = 0, rows = [], width = $("certs").clientWidth || 1000;
+      dated.sort(function (a, b) { return a.not_after < b.not_after ? -1 : a.not_after > b.not_after ? 1 : 0; });
+      dated.forEach(function (c) {
+        var t = new Date(c.not_after + "T00:00:00Z").getTime();
+        var pin = el("button", "pin" + (c.quantum_safe ? " safe" : "") + (t > end ? " over" : ""));
+        pin.type = "button";
+        pin.style.left = pct(t) + "%";
+        // certificates that expire close together stack instead of overlapping
+        var x = pct(t) * width / 100, row = 0;
+        while (row < 5 && rows[row] !== undefined && x - rows[row] < 16) row++;
+        rows[row] = x;
+        pin.style.top = (4 + row * 16) + "px";
+        if (!c.quantum_safe && t >= dep) late++;
+        bindTip(pin, (c.subject || c.path) + ": " + c.key_algorithm +
+          (c.key_bits && String(c.key_algorithm).indexOf(c.key_bits) < 0 ? "-" + c.key_bits : "") +
+          ", expires " + c.not_after + (t < today ? " (expired)" : ""));
+        $("certs").appendChild(pin);
+      });
+      $("certs").style.height = (14 + rows.length * 16) + "px";
+      var k1 = el("span", "key"); k1.appendChild(el("span", "dot critical"));
+      k1.appendChild(el("span", null, "Certificate expiry, quantum-vulnerable key"));
+      foot.appendChild(k1);
+      if (dated.some(function (c) { return c.quantum_safe; })) {
+        var k2 = el("span", "key"); k2.appendChild(el("span", "dot safe"));
+        k2.appendChild(el("span", null, "Certificate expiry, post-quantum key"));
+        foot.appendChild(k2);
+      }
+      if (late) foot.appendChild(el("span", null, plural(late, "certificate") +
+        (late === 1 ? " outlives" : " outlive") + " the deprecation date."));
+    } else {
+      foot.appendChild(el("span", null, "No certificates with a readable expiry date were found."));
+    }
+  })();
+
+  /* state */
+  var state = { risks: {}, algorithm: null, priority: null, text: "", newOnly: false,
+                sort: "risk", dir: "asc", shown: PAGE };
+  RISKS.forEach(function (r) { state.risks[r] = r !== "safe"; });
+  var present = {}; D.findings.forEach(function (f) { present[f.r] = (present[f.r] || 0) + 1; });
+
+  function setAlgorithm(name, priority) {
+    priority = priority || null;
+    if (state.algorithm === name && state.priority === priority) {
+      state.algorithm = null; state.priority = null;
+    } else {
+      state.algorithm = name; state.priority = priority;
+      // make sure the risk levels this selection needs are switched on
+      D.findings.forEach(function (x) {
+        if (x.a === name && (!priority || x.q === priority)) state.risks[x.r] = true;
+      });
+    }
+    state.shown = PAGE;
+    renderAll();
+  }
+
+  /* fix first */
+  function renderTiers() {
+    var root = $("tiers"); root.textContent = "";
+    if (!S.priorities.length) { hide("sec-tiers"); return; }
+    S.priorities.forEach(function (t) {
+      var li = el("li", "tier");
+      li.appendChild(el("div", "tier-n", String(t.n)));
+      var body = el("div");
+      body.appendChild(el("h3", null, t.title));
+      body.appendChild(el("p", null, t.guidance));
+      li.appendChild(body);
+      var count = el("div", "tier-count", fmt(t.count));
+      count.appendChild(el("small", null, t.count === 1 ? "finding" : "findings"));
+      li.appendChild(count);
+      var chips = el("div", "chips");
+      t.algorithms.forEach(function (a) {
+        var chip = el("button", "chip", a[0]);
+        chip.type = "button";
+        chip.appendChild(el("b", null, fmt(a[1])));
+        chip.setAttribute("aria-pressed", String(state.algorithm === a[0] && state.priority === t.n));
+        chip.addEventListener("click", function () { setAlgorithm(a[0], t.n); jump(); });
+        chips.appendChild(chip);
+      });
+      li.appendChild(chips);
+      root.appendChild(li);
+    });
+  }
+
+  /* bars */
+  function renderBars() {
+    var root = $("bars"); root.textContent = "";
+    if (!S.byAlgorithm.length) { hide("sec-bars"); return; }
+    var top = Math.max.apply(null, S.byAlgorithm.map(function (a) { return a[1]; }));
+    S.byAlgorithm.forEach(function (a) {
+      var row = el("div", "bar-row" + (state.algorithm === a[0] ? " on" : ""));
+      var name = el("button", "bar-name"); name.type = "button";
+      name.appendChild(el("span", "dot " + a[2]));
+      name.appendChild(el("span", null, a[0]));
+      name.setAttribute("aria-pressed", String(state.algorithm === a[0]));
+      var cell = el("div", "bar-cell");
+      var bar = el("div", "bar " + a[2]);
+      bar.style.width = "calc(" + (100 * a[1] / top) + "% - 60px)";
+      cell.appendChild(bar);
+      cell.appendChild(el("span", "bar-val", fmt(a[1])));
+      row.appendChild(name); row.appendChild(cell);
+      bindTip(cell, a[0] + ": " + plural(a[1], "finding") + ", " + a[2] + " (" + D.riskLabels[a[2]] + ")");
+      row.addEventListener("click", function () { setAlgorithm(a[0]); jump(); });
+      root.appendChild(row);
+    });
+  }
+
+  function jump() {
+    if (state.algorithm) $("sec-findings").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* areas */
+  function renderAreas() {
+    var t = $("areas");
+    if (!S.areas.length) { hide("sec-areas"); return; }
+    var head = el("tr");
+    [["Area"], ["Key establishment", 1], ["Signatures", 1], ["Classically weak", 1], ["Policy", 1], ["Total", 1]]
+      .forEach(function (h) { head.appendChild(el("th", h[1] ? "num" : null, h[0])); });
+    var thead = el("thead"); thead.appendChild(head); t.appendChild(thead);
+    var body = el("tbody");
+    S.areas.forEach(function (a) {
+      var tr = el("tr");
+      tr.appendChild(el("td", "where", a[0]));
+      for (var i = 1; i <= 5; i++) tr.appendChild(el("td", "num", a[i] ? fmt(a[i]) : ""));
+      body.appendChild(tr);
+    });
+    t.appendChild(body);
+  }
+
+  /* findings */
+  function filtered() {
+    var q = state.text.trim().toLowerCase();
+    var rows = D.findings.filter(function (f) {
+      if (!state.risks[f.r]) return false;
+      if (state.algorithm && f.a !== state.algorithm) return false;
+      if (state.priority && f.q !== state.priority) return false;
+      if (state.newOnly && !f.new) return false;
+      if (q && (f.p + " " + f.a + " " + f.s + " " + f.d + " " + f.c).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+    var dir = state.dir === "asc" ? 1 : -1;
+    var key = {
+      risk: function (f) { return RANK[f.r] * 10 + (f.q || 9); },
+      algorithm: function (f) { return f.a.toLowerCase(); },
+      location: function (f) { return f.p.toLowerCase(); },
+      context: function (f) { return f.c; }
+    }[state.sort];
+    rows.sort(function (x, y) {
+      var a = key(x), b = key(y);
+      if (a < b) return -dir; if (a > b) return dir;
+      if (x.p !== y.p) return x.p < y.p ? -1 : 1;
+      return x.l - y.l;
+    });
+    return rows;
+  }
+
+  function renderFilters(count) {
+    var root = $("filters"); root.textContent = "";
+    RISKS.forEach(function (r) {
+      if (!present[r]) return;
+      var b = el("button", "toggle"); b.type = "button";
+      b.appendChild(el("span", "dot " + r));
+      b.appendChild(el("span", null, r + " " + fmt(present[r])));
+      b.setAttribute("aria-pressed", String(state.risks[r]));
+      b.addEventListener("click", function () { state.risks[r] = !state.risks[r]; state.shown = PAGE; renderFindings(); });
+      root.appendChild(b);
+    });
+    if (M.baseline) {
+      var nb = el("button", "toggle", "New only"); nb.type = "button";
+      nb.setAttribute("aria-pressed", String(state.newOnly));
+      nb.addEventListener("click", function () { state.newOnly = !state.newOnly; state.shown = PAGE; renderFindings(); });
+      root.appendChild(nb);
+    }
+    var search = el("input"); search.type = "search"; search.placeholder = "Filter by path, algorithm or text";
+    search.value = state.text; search.setAttribute("aria-label", "Filter findings");
+    search.addEventListener("input", function () {
+      state.text = search.value; state.shown = PAGE; renderFindings(true);
+    });
+    root.appendChild(search);
+    if (state.algorithm) {
+      var clear = el("button", "linkish", "Clear filter: " + state.algorithm +
+        (state.priority ? ", priority " + state.priority : ""));
+      clear.type = "button";
+      clear.addEventListener("click", function () { state.algorithm = null; state.priority = null; renderAll(); });
+      root.appendChild(clear);
+    }
+    root.appendChild(el("span", "count", plural(count, "finding") + " shown of " + fmt(D.findings.length)));
+  }
+
+  function renderFindings(keepFocus) {
+    var rows = filtered();
+    if (keepFocus) {
+      $("filters").querySelector(".count").textContent =
+        plural(rows.length, "finding") + " shown of " + fmt(D.findings.length);
+    } else {
+      renderFilters(rows.length);
+    }
+    var t = $("findings"); t.textContent = "";
+    $("empty").hidden = rows.length > 0;
+    if (!D.findings.length) { hide("sec-findings"); return; }
+    var head = el("tr");
+    [["Risk", "risk"], ["Algorithm", "algorithm"], ["Location", "location"], ["Context", "context"], ["Source", null]]
+      .forEach(function (h) {
+        var th = el("th", h[1] ? null : "hide-s");
+        if (h[1]) {
+          var b = el("button", null, h[0]); b.type = "button";
+          if (state.sort === h[1]) b.setAttribute("data-dir", state.dir);
+          b.addEventListener("click", function () {
+            if (state.sort === h[1]) state.dir = state.dir === "asc" ? "desc" : "asc";
+            else { state.sort = h[1]; state.dir = "asc"; }
+            renderFindings();
+          });
+          th.appendChild(b);
+        } else th.textContent = h[0];
+        head.appendChild(th);
+      });
+    var thead = el("thead"); thead.appendChild(head); t.appendChild(thead);
+    var body = el("tbody");
+    rows.slice(0, state.shown).forEach(function (f) {
+      var tr = el("tr", "finding"); tr.tabIndex = 0;
+      var c1 = el("td"); c1.appendChild(riskCell(f.r));
+      if (M.baseline && f.new) c1.appendChild(el("span", "tag", "new"));
+      tr.appendChild(c1);
+      tr.appendChild(el("td", null, f.a));
+      tr.appendChild(el("td", "where", f.p + ":" + f.l));
+      tr.appendChild(el("td", null, f.c));
+      var parsed = f.c === "certificate" || f.c === "key";
+      var src = el("td", "hide-s"); src.appendChild(el("div", "snip", parsed ? (f.d || f.s) : f.s)); tr.appendChild(src);
+      var open = null;
+      function toggle() {
+        if (open) { open.remove(); open = null; return; }
+        open = el("tr", "more");
+        var td = el("td"); td.colSpan = 5;
+        if (f.s) td.appendChild(el("pre", null, f.s));
+        if (f.d) td.appendChild(el("p", null, f.d));
+        if (f.w) td.appendChild(el("p", null, "Replace with: " + f.w));
+        if (f.n) td.appendChild(el("p", null, f.n));
+        open.appendChild(td);
+        tr.after(open);
+      }
+      tr.addEventListener("click", toggle);
+      tr.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+      });
+      body.appendChild(tr);
+    });
+    t.appendChild(body);
+    var more = $("showmore");
+    more.hidden = rows.length <= state.shown;
+    more.textContent = "Show " + fmt(Math.min(PAGE, rows.length - state.shown)) + " more";
+  }
+  $("showmore").addEventListener("click", function () { state.shown += PAGE; renderFindings(); });
+
+  /* certificates, dependencies, notes */
+  function simpleTable(id, sec, heads, rows) {
+    if (!rows.length) { hide(sec); return; }
+    var t = $(id), head = el("tr");
+    heads.forEach(function (h) { head.appendChild(el("th", null, h)); });
+    var thead = el("thead"); thead.appendChild(head); t.appendChild(thead);
+    var body = el("tbody");
+    rows.forEach(function (r) {
+      var tr = el("tr");
+      r.forEach(function (c) {
+        if (c && c.nodeType) { var td = el("td"); td.appendChild(c); tr.appendChild(td); }
+        else if (c && typeof c === "object") tr.appendChild(el("td", c.mono ? "where" : "nw", c.text));
+        else tr.appendChild(el("td", null, c));
+      });
+      body.appendChild(tr);
+    });
+    t.appendChild(body);
+  }
+  simpleTable("certtable", "sec-certs", ["Status", "File", "Subject", "Key", "Signature", "Expires"],
+    D.certificates.map(function (c) {
+      var key = c.key_algorithm + (c.key_bits && String(c.key_algorithm).indexOf(c.key_bits) < 0 ? "-" + c.key_bits : "");
+      return [riskCell(c.quantum_safe ? "safe" : "critical"), { mono: 1, text: c.path + ":" + c.line },
+              c.subject || "", { nw: 1, text: key }, c.signature_algorithm || "",
+              { nw: 1, text: c.not_after || "" }];
+    }));
+  simpleTable("deptable", "sec-deps", ["Library", "Version", "Ecosystem", "Manifest", "Note", "Post-quantum path"],
+    D.dependencies.map(function (d) {
+      return [{ mono: 1, text: d.library }, { nw: 1, text: d.version || "" }, d.ecosystem, { mono: 1, text: d.path },
+              d.note, d.pqc ? riskCell("safe") : (d.pqPath || "")];
+    }));
+  if (D.notes.length) D.notes.forEach(function (n) { $("notes").appendChild(el("li", null, n)); });
+  else hide("sec-notes");
+
+  $("footer").textContent = "Generated by pqscan " + M.version + " with the " + M.policy +
+    " policy. Static analysis only: it finds names in source, configuration, certificates and " +
+    "manifests, not runtime behaviour. Review the findings before treating this as a complete inventory.";
+
+  function renderAll() { renderTiers(); renderBars(); renderFindings(); }
+  renderAreas();
+  renderAll();
+})();
+</script>
+</body>
+</html>

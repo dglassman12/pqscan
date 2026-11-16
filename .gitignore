@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+build/
+dist/
+.venv/
+venv/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local scan output (the committed examples live in samples/)
+/report.md
+/report.html
+/cbom.json
+/findings.json
+/pqscan.sarif
+/badge.svg

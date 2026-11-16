@@ -1,0 +1,1502 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:0797d012-0f77-4dc3-b9ab-1d6ed0a011a2",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-16T02:22:42Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "pqscan",
+          "version": "0.3.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "scan-target",
+      "name": "examples"
+    },
+    "properties": [
+      {
+        "name": "pqscan:policy",
+        "value": "nist"
+      },
+      {
+        "name": "pqscan:filesScanned",
+        "value": "12"
+      },
+      {
+        "name": "pqscan:mentionsIncluded",
+        "value": "false"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "cryptoFunctions": [
+            "keygen",
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/certs/api.example.test.crt",
+            "line": 1,
+            "additionalContext": "X.509 certificate, CN=api.example.test, RSA-2048, signed with sha256WithRSAEncryption, expires 2034-04-08, self-signed"
+          },
+          {
+            "location": "deploy/certs/legacy-root.example.test.crt",
+            "line": 1,
+            "additionalContext": "X.509 certificate, CN=Legacy Root CA (test fixture), RSA-2048, signed with sha1WithRSAEncryption, expires 2036-09-24, self-signed"
+          },
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "deploy/sshd_config",
+            "line": 2,
+            "additionalContext": "HostKey /etc/ssh/ssh_host_rsa_key"
+          },
+          {
+            "location": "deploy/sshd_config",
+            "line": 3,
+            "additionalContext": "HostKeyAlgorithms ssh-rsa,rsa-sha2-512,ssh-ed25519"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 19,
+            "additionalContext": "tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 20,
+            "additionalContext": "tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,"
+          },
+          {
+            "location": "services/payments/TokenSigner.java",
+            "line": 15,
+            "additionalContext": "Signature signer = Signature.getInstance(\"SHA256withRSA\");"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 11,
+            "additionalContext": "from cryptography.hazmat.primitives.asymmetric import rsa, ec, padding"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 18,
+            "additionalContext": "return rsa.generate_private_key(public_exponent=65537, key_size=2048)"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 29,
+            "additionalContext": "return key.sign(payload, padding.PKCS1v15(), hashes.SHA256())"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 69,
+            "additionalContext": "ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 76,
+            "additionalContext": "\"signing_algorithm\": \"RSA-2048\","
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "13"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-KEM (FIPS 203) for key establishment and encryption; ML-DSA (FIPS 204) or SLH-DSA (FIPS 205) for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdh",
+      "name": "ECDH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 19,
+            "additionalContext": "tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 69,
+            "additionalContext": "ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 79,
+            "additionalContext": "\"kex\": \"ECDH\","
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "4"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/diffie-hellman-finite-field",
+      "name": "Diffie-Hellman (finite field)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "deploy/nginx.conf",
+            "line": 9,
+            "additionalContext": "ssl_dhparam         /etc/nginx/dhparam.pem;"
+          },
+          {
+            "location": "deploy/sshd_config",
+            "line": 4,
+            "additionalContext": "KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "3"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/x25519-x448",
+      "name": "X25519 / X448",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/sshd_config",
+            "line": 4,
+            "additionalContext": "KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 22,
+            "additionalContext": "CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "2"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-KEM (FIPS 203); a hybrid such as X25519MLKEM768 during transition"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/elliptic-curve-scheme-not-stated",
+      "name": "Elliptic curve (scheme not stated)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other",
+          "cryptoFunctions": [
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/payments/TokenSigner.java",
+            "line": 22,
+            "additionalContext": "KeyPairGenerator generator = KeyPairGenerator.getInstance(\"EC\");"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 23,
+            "additionalContext": "return ec.generate_private_key(ec.SECP256R1())"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "2"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-KEM (FIPS 203) for key agreement; ML-DSA (FIPS 204) for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/certs/gateway.example.test.crt",
+            "line": 1,
+            "additionalContext": "X.509 certificate, CN=gateway.example.test, EC P-256, signed with ecdsa-with-SHA256, expires 2029-05-04, self-signed"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 5,
+            "additionalContext": "\"crypto/ecdsa\""
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 11,
+            "additionalContext": "func newServerKey() (*ecdsa.PrivateKey, error) {"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 12,
+            "additionalContext": "return ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 80,
+            "additionalContext": "\"jwt_alg\": \"ES256\","
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "5"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "2"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/eddsa",
+      "name": "EdDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/sshd_config",
+            "line": 3,
+            "additionalContext": "HostKeyAlgorithms ssh-rsa,rsa-sha2-512,ssh-ed25519"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "critical"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "shor"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "2"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "ML-DSA (FIPS 204) or SLH-DSA (FIPS 205)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-1",
+      "name": "SHA-1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/certs/legacy-root.example.test.crt",
+            "line": 1,
+            "additionalContext": "Certificate signed with sha1WithRSAEncryption"
+          },
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "deploy/sshd_config",
+            "line": 4,
+            "additionalContext": "KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 20,
+            "additionalContext": "tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,"
+          },
+          {
+            "location": "services/payments/TokenSigner.java",
+            "line": 28,
+            "additionalContext": "return MessageDigest.getInstance(\"SHA-1\").digest(data);"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 36,
+            "additionalContext": "return hashlib.sha1(data).hexdigest()"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 77,
+            "additionalContext": "\"hash\": \"SHA-1\","
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "high"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "classic"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "7"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "3"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "SHA-256 or stronger (SHA-384 for CNSA 2.0)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/protocol/tls-1-0-1-1",
+      "name": "TLS 1.0 / 1.1",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.0 / 1.1"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 7
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 17
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "high"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "TLS 1.3 (the only version with post-quantum hybrid key exchange)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rc4",
+      "name": "RC4",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "stream-cipher",
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "high"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "classic"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "3"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "AES-256 (GCM) or ChaCha20-Poly1305"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/3des",
+      "name": "3DES",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/gateway/tls.go",
+            "line": 20,
+            "additionalContext": "tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,"
+          },
+          {
+            "location": "services/payments/TokenSigner.java",
+            "line": 32,
+            "additionalContext": "Cipher cipher = Cipher.getInstance(\"DESede/CBC/PKCS5Padding\");"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "high"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "classic"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "2"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "3"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "AES-256 (GCM) or ChaCha20-Poly1305"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/md5",
+      "name": "MD5",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "vulnerable_app.py",
+            "line": 40,
+            "additionalContext": "return hashlib.md5(data).hexdigest()"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "high"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "classic"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "3"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "SHA-256 or stronger (SHA-384 for CNSA 2.0)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-128",
+      "name": "AES-128",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 19,
+            "additionalContext": "tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 49,
+            "additionalContext": "def encrypt_aes128(key: bytes, iv: bytes, plaintext: bytes) -> bytes:"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 69,
+            "additionalContext": "ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 78,
+            "additionalContext": "\"symmetric\": \"AES-128\","
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "low"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "grover"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "5"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "4"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "AES-256 where policy requires it"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-key-size-not-stated",
+      "name": "AES (key size not stated)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "vulnerable_app.py",
+            "line": 51,
+            "additionalContext": "cipher = Cipher(algorithms.AES(key), modes.CBC(iv))"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "info"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "grover"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        },
+        {
+          "name": "pqscan:migrationPriority",
+          "value": "4"
+        },
+        {
+          "name": "pqscan:recommendedReplacement",
+          "value": "Confirm the key length; use 256-bit keys"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 2
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "deploy/sshd_config",
+            "line": 4,
+            "additionalContext": "KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1"
+          },
+          {
+            "location": "services/gateway/tls.go",
+            "line": 19,
+            "additionalContext": "tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,"
+          },
+          {
+            "location": "services/payments/TokenSigner.java",
+            "line": 15,
+            "additionalContext": "Signature signer = Signature.getInstance(\"SHA256withRSA\");"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 29,
+            "additionalContext": "return key.sign(payload, padding.PKCS1v15(), hashes.SHA256())"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 69,
+            "additionalContext": "ctx.set_ciphers(\"ECDHE-RSA-AES128-GCM-SHA256\")"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "6"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-256",
+      "name": "AES-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 5
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 8,
+            "additionalContext": "ssl_ciphers         ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-SHA:RC4-SHA;"
+          },
+          {
+            "location": "deploy/sshd_config",
+            "line": 5,
+            "additionalContext": "Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 56,
+            "additionalContext": "def encrypt_aes256(key: bytes, iv: bytes, plaintext: bytes) -> bytes:"
+          },
+          {
+            "location": "vulnerable_app.py",
+            "line": 58,
+            "additionalContext": "cipher = Cipher(algorithms.AES256(key), modes.GCM(iv))"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-512",
+      "name": "SHA-512",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 5
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/sshd_config",
+            "line": 3,
+            "additionalContext": "HostKeyAlgorithms ssh-rsa,rsa-sha2-512,ssh-ed25519"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/hybrid-pq-key-exchange",
+      "name": "Hybrid PQ key exchange",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "combiner",
+          "cryptoFunctions": [
+            "keygen",
+            "encapsulate",
+            "decapsulate"
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/sshd_config",
+            "line": 4,
+            "additionalContext": "KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1"
+          },
+          {
+            "location": "pq/hybrid_kex.py",
+            "line": 10,
+            "additionalContext": "TLS_GROUP = \"X25519MLKEM768\""
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/chacha20",
+      "name": "ChaCha20",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "stream-cipher",
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ]
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/sshd_config",
+            "line": 5,
+            "additionalContext": "Ciphers aes256-gcm@openssh.com,chacha20-poly1305@openssh.com"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ml-kem",
+      "name": "ML-KEM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "cryptoFunctions": [
+            "keygen",
+            "encapsulate",
+            "decapsulate"
+          ],
+          "parameterSetIdentifier": "768",
+          "nistQuantumSecurityLevel": 3
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pq/hybrid_kex.py",
+            "line": 9,
+            "additionalContext": "KEM_NAME = \"ML-KEM-768\""
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ml-dsa",
+      "name": "ML-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "parameterSetIdentifier": "65",
+          "nistQuantumSecurityLevel": 3
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pq/hybrid_kex.py",
+            "line": 11,
+            "additionalContext": "SIGNATURE = \"ML-DSA-65\""
+          },
+          {
+            "location": "pq/pq.example.test.crt",
+            "line": 1,
+            "additionalContext": "X.509 certificate, CN=pq.example.test, ML-DSA-65, signed with ML-DSA-65, expires 2036-10-29, self-signed"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha-384",
+      "name": "SHA-384",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 4
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "vulnerable_app.py",
+            "line": 44,
+            "additionalContext": "return hashlib.sha384(data).hexdigest()"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:risk",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:quantumThreat",
+          "value": "safe"
+        },
+        {
+          "name": "pqscan:occurrences",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/certificate/1",
+      "name": "CN=api.example.test",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "certificateFormat": "X.509",
+          "subjectName": "CN=api.example.test",
+          "issuerName": "CN=api.example.test",
+          "notValidBefore": "2026-11-16T00:00:00Z",
+          "notValidAfter": "2034-04-08T00:00:00Z"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/certs/api.example.test.crt",
+            "line": 1
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:publicKey",
+          "value": "RSA-2048"
+        },
+        {
+          "name": "pqscan:signatureAlgorithm",
+          "value": "sha256WithRSAEncryption"
+        },
+        {
+          "name": "pqscan:quantumSafe",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/certificate/2",
+      "name": "CN=gateway.example.test",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "certificateFormat": "X.509",
+          "subjectName": "CN=gateway.example.test",
+          "issuerName": "CN=gateway.example.test",
+          "notValidBefore": "2026-11-16T00:00:00Z",
+          "notValidAfter": "2029-05-04T00:00:00Z"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/certs/gateway.example.test.crt",
+            "line": 1
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:publicKey",
+          "value": "EC P-256"
+        },
+        {
+          "name": "pqscan:signatureAlgorithm",
+          "value": "ecdsa-with-SHA256"
+        },
+        {
+          "name": "pqscan:quantumSafe",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/certificate/3",
+      "name": "CN=Legacy Root CA (test fixture)",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "certificateFormat": "X.509",
+          "subjectName": "CN=Legacy Root CA (test fixture)",
+          "issuerName": "CN=Legacy Root CA (test fixture)",
+          "notValidBefore": "2026-11-16T00:00:00Z",
+          "notValidAfter": "2036-09-24T00:00:00Z"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/certs/legacy-root.example.test.crt",
+            "line": 1
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:publicKey",
+          "value": "RSA-2048"
+        },
+        {
+          "name": "pqscan:signatureAlgorithm",
+          "value": "sha1WithRSAEncryption"
+        },
+        {
+          "name": "pqscan:quantumSafe",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/certificate/4",
+      "name": "CN=pq.example.test",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "certificateFormat": "X.509",
+          "subjectName": "CN=pq.example.test",
+          "issuerName": "CN=pq.example.test",
+          "notValidBefore": "2026-11-01T00:00:00Z",
+          "notValidAfter": "2036-10-29T00:00:00Z"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pq/pq.example.test.crt",
+            "line": 1
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "pqscan:publicKey",
+          "value": "ML-DSA-65"
+        },
+        {
+          "name": "pqscan:signatureAlgorithm",
+          "value": "ML-DSA-65"
+        },
+        {
+          "name": "pqscan:quantumSafe",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/cryptography/requirements-txt",
+      "name": "cryptography",
+      "description": "Python crypto bindings: RSA, ECC, AES, hashes",
+      "properties": [
+        {
+          "name": "pqscan:manifest",
+          "value": "requirements.txt"
+        },
+        {
+          "name": "pqscan:ecosystem",
+          "value": "pypi"
+        },
+        {
+          "name": "pqscan:postQuantumLibrary",
+          "value": "false"
+        },
+        {
+          "name": "pqscan:postQuantumPath",
+          "value": "ML-KEM and ML-DSA from version 48"
+        }
+      ],
+      "version": "41.0.7",
+      "purl": "pkg:pypi/cryptography@41.0.7"
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/paramiko/requirements-txt",
+      "name": "paramiko",
+      "description": "SSH implementation: RSA / ECDSA / Ed25519 keys",
+      "properties": [
+        {
+          "name": "pqscan:manifest",
+          "value": "requirements.txt"
+        },
+        {
+          "name": "pqscan:ecosystem",
+          "value": "pypi"
+        },
+        {
+          "name": "pqscan:postQuantumLibrary",
+          "value": "false"
+        }
+      ],
+      "version": "3.4.0",
+      "purl": "pkg:pypi/paramiko@3.4.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/pypi/pyjwt/requirements-txt",
+      "name": "pyjwt",
+      "description": "JOSE / JWT: usually RSA or ECDSA signed",
+      "properties": [
+        {
+          "name": "pqscan:manifest",
+          "value": "requirements.txt"
+        },
+        {
+          "name": "pqscan:ecosystem",
+          "value": "pypi"
+        },
+        {
+          "name": "pqscan:postQuantumLibrary",
+          "value": "false"
+        }
+      ],
+      "version": "2.8.0",
+      "purl": "pkg:pypi/pyjwt@2.8.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/npm/noble-post-quantum/web-package-json",
+      "name": "@noble/post-quantum",
+      "description": "Post-quantum algorithms",
+      "properties": [
+        {
+          "name": "pqscan:manifest",
+          "value": "web/package.json"
+        },
+        {
+          "name": "pqscan:ecosystem",
+          "value": "npm"
+        },
+        {
+          "name": "pqscan:postQuantumLibrary",
+          "value": "true"
+        },
+        {
+          "name": "pqscan:versionSpec",
+          "value": "^0.2.0"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/npm/jsonwebtoken/web-package-json",
+      "name": "jsonwebtoken",
+      "description": "JOSE / JWT: usually RSA or ECDSA signed",
+      "properties": [
+        {
+          "name": "pqscan:manifest",
+          "value": "web/package.json"
+        },
+        {
+          "name": "pqscan:ecosystem",
+          "value": "npm"
+        },
+        {
+          "name": "pqscan:postQuantumLibrary",
+          "value": "false"
+        },
+        {
+          "name": "pqscan:versionSpec",
+          "value": "^9.0.2"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "library/npm/node-forge/web-package-json",
+      "name": "node-forge",
+      "description": "TLS, RSA and X.509 in JavaScript",
+      "properties": [
+        {
+          "name": "pqscan:manifest",
+          "value": "web/package.json"
+        },
+        {
+          "name": "pqscan:ecosystem",
+          "value": "npm"
+        },
+        {
+          "name": "pqscan:postQuantumLibrary",
+          "value": "false"
+        }
+      ],
+      "version": "1.3.1",
+      "purl": "pkg:npm/node-forge@1.3.1"
+    }
+  ]
+}

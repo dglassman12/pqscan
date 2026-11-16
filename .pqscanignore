@@ -1,0 +1,10 @@
+# Paths pqscan skips when it scans this repository (one glob per line).
+# The examples and tests are deliberately full of legacy cryptography, and
+# the rule, parser and library tables name every algorithm by design.
+examples/
+tests/
+samples/
+pqscan/rules.py
+pqscan/certs.py
+pqscan/deps.py
+pqscan/cbom.py

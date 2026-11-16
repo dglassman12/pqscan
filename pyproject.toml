@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pqscan"
+description = "Cryptographic inventory scanner for post-quantum readiness"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Daniel Glassman" }]
+keywords = ["post-quantum", "cryptography", "cbom", "cyclonedx", "sarif", "security"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security :: Cryptography",
+]
+dependencies = []
+dynamic = ["version"]
+
+[project.optional-dependencies]
+# Only needed to run the CycloneDX schema test.
+test = ["cyclonedx-python-lib>=8", "jsonschema"]
+
+[project.scripts]
+pqscan = "pqscan.cli:main"
+
+[tool.setuptools]
+packages = ["pqscan"]
+
+[tool.setuptools.dynamic]
+version = { attr = "pqscan.__version__" }
